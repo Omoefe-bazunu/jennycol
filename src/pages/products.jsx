@@ -73,27 +73,30 @@ const Products = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
       {/* Page Title */}
-      <h2 className="text-3xl font-semibold text-center py-4">Products</h2>
+      <h2 className="text-4xl font-bold text-center py-6 text-purple-800 relative">
+        Our Collections
+        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+      </h2>
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row md:justify-between items-center px-6 pb-4">
-        <div className="flex flex-wrap gap-4">
+      <div className="flex flex-col md:flex-row md:justify-between items-center px-6 pb-6 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-md">
+        <div className="flex flex-wrap gap-4 w-full md:w-auto">
           <input
             type="text"
             name="search"
-            placeholder="Search products..."
+            placeholder="Search treasures..."
             value={filters.search}
             onChange={handleFilterChange}
-            className="border rounded px-3 py-2 w-full md:w-64"
+            className="border-2 border-purple-200 rounded-full px-4 py-2 w-full md:w-64 focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50"
           />
 
           <select
             name="category"
             value={filters.category}
             onChange={handleFilterChange}
-            className="border rounded px-3 py-2"
+            className="border-2 border-purple-200 rounded-full px-4 py-2 bg-white/50 focus:outline-none focus:border-pink-400 transition-colors duration-300"
           >
             <option value="all">All Categories</option>
             <option value="electronics">Electronics</option>
@@ -102,7 +105,7 @@ const Products = () => {
             <option value="sports">Sports</option>
           </select>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <input
               type="range"
               name="maxPrice"
@@ -110,9 +113,11 @@ const Products = () => {
               max="1000"
               value={filters.maxPrice}
               onChange={handleFilterChange}
-              className="cursor-pointer"
+              className="w-32 accent-pink-500 cursor-pointer"
             />
-            <span className="text-gray-700">Max: ${filters.maxPrice}</span>
+            <span className="text-purple-700 font-medium">
+              Max: ${filters.maxPrice}
+            </span>
           </div>
         </div>
 
@@ -120,16 +125,20 @@ const Products = () => {
         <div className="flex gap-2 mt-4 md:mt-0">
           <button
             onClick={() => setView("grid")}
-            className={`px-4 py-2 ${
-              view === "grid" ? "bg-blue-600 text-white" : "border"
+            className={`px-5 py-2 rounded-full transition-all duration-300 ${
+              view === "grid"
+                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md"
+                : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
             }`}
           >
             Grid
           </button>
           <button
             onClick={() => setView("list")}
-            className={`px-4 py-2 ${
-              view === "list" ? "bg-blue-600 text-white" : "border"
+            className={`px-5 py-2 rounded-full transition-all duration-300 ${
+              view === "list"
+                ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md"
+                : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
             }`}
           >
             List
@@ -138,12 +147,12 @@ const Products = () => {
       </div>
 
       {/* Scrollable Product List */}
-      <div className="flex-grow overflow-auto px-6 pb-20">
+      <div className="flex-grow overflow-y-auto px-6 mt-4">
         <div
           className={
             view === "grid"
-              ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-              : "flex flex-col gap-4"
+              ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-20"
+              : "flex flex-col gap-6 pb-20"
           }
         >
           {products.length > 0 ? (
@@ -151,32 +160,36 @@ const Products = () => {
               <Link
                 key={product.id}
                 to={`/products/${product.id}`}
-                className={`border rounded-lg p-4 shadow-md ${
-                  view === "list" ? "flex gap-4 items-center" : ""
+                className={`group bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 ${
+                  view === "list" ? "flex gap-6 items-center" : ""
                 }`}
               >
                 <div
-                  className={`bg-gray-200 ${
-                    view === "grid" ? "h-40" : "h-24 w-24"
-                  } rounded-md`}
+                  className={`bg-gradient-to-br from-purple-200 to-pink-200 rounded-lg overflow-hidden transform group-hover:scale-105 transition-transform duration-300 ${
+                    view === "grid" ? "h-48 mb-5" : "h-24 w-24"
+                  }`}
                 ></div>
-                <div>
-                  <h3 className="text-lg font-semibold">{product.name}</h3>
+                <div className={view === "list" ? "flex-1" : ""}>
+                  <h3 className="text-xl font-semibold text-purple-900 mb-2">
+                    {product.name}
+                  </h3>
                   {product.originalPrice ? (
-                    <p className="text-red-600 font-bold">
+                    <p className="text-pink-600 font-bold">
                       ${product.price}{" "}
-                      <span className="text-gray-500 line-through text-sm ml-2">
+                      <span className="text-purple-400 line-through text-sm ml-2">
                         ${product.originalPrice}
                       </span>
                     </p>
                   ) : (
-                    <p className="text-gray-600">${product.price}</p>
+                    <p className="text-pink-600 font-bold">${product.price}</p>
                   )}
                 </div>
               </Link>
             ))
           ) : (
-            <p className="text-center text-gray-500">No products found.</p>
+            <p className="text-center text-purple-600 font-medium py-10">
+              No products found. Try adjusting your filters!
+            </p>
           )}
         </div>
       </div>

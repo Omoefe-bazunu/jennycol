@@ -44,48 +44,66 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="min-h-screen px-6 py-8 flex flex-col items-center">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">User Profile</h2>
-        <p className="text-lg font-medium">{user.name}</p>
-        <p className="text-gray-600">{user.email}</p>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
+      <div className="flex-grow overflow-y-auto px-6 py-8">
+        <div className="w-full max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100">
+          <h2 className="text-3xl font-bold text-purple-900 mb-6 relative">
+            Your Profile
+            <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+          </h2>
+          <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-4 rounded-lg">
+            <p className="text-xl font-semibold text-purple-800">{user.name}</p>
+            <p className="text-purple-600 mt-1">{user.email}</p>
+          </div>
 
-        <h3 className="text-xl font-semibold mt-6">Favorites</h3>
-        {favorites.length > 0 ? (
-          <ul className="mt-4 space-y-3">
-            {favorites.map((product) => (
-              <li
-                key={product.id}
-                className="flex justify-between items-center border p-2 rounded"
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-12 h-12 rounded"
-                />
-                <div>
-                  <p className="font-medium">{product.name}</p>
-                  <p className="text-gray-500">${product.price}</p>
-                </div>
-                <button
-                  onClick={() => removeFavorite(product.id)}
-                  className="text-red-500"
+          <h3 className="text-2xl font-semibold text-purple-800 mt-8 mb-4 relative">
+            Favorite Products
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+          </h3>
+          {favorites.length > 0 ? (
+            <ul className="mt-4 space-y-4">
+              {favorites.map((product) => (
+                <li
+                  key={product.id}
+                  className="flex justify-between items-center bg-white p-4 rounded-lg shadow-md border border-purple-100 transition-all duration-300 hover:shadow-lg"
                 >
-                  Remove
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-500 mt-2">No favorite items yet.</p>
-        )}
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-14 h-14 rounded-lg object-cover border border-purple-200"
+                    />
+                    <div>
+                      <p className="font-semibold text-purple-900">
+                        {product.name}
+                      </p>
+                      <p className="text-pink-600 font-bold">
+                        ${product.price}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => removeFavorite(product.id)}
+                    className="text-white bg-gradient-to-r from-red-500 to-pink-500 px-4 py-1 rounded-full hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-purple-600 font-medium mt-2">
+              No favorite products yet. Start exploring!
+            </p>
+          )}
 
-        <button
-          onClick={handleSignOut}
-          className="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600"
-        >
-          Sign Out
-        </button>
+          <button
+            onClick={handleSignOut}
+            className="mt-8 w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-full hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-md"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
     </div>
   );

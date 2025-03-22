@@ -6,6 +6,8 @@ import ProductDetails from "./pages/productDetails";
 import UserProfile from "./pages/profile";
 import Contact from "./pages/contact";
 import AboutUs from "./pages/About";
+import SignIn from "./pages/signin";
+import SignUp from "./pages/signup";
 // import Orders from "./pages/Orders";
 // import Auth from "./pages/Auth";
 // import Navbar from "./components/Navbar";
@@ -24,7 +26,8 @@ const App = () => {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<AboutUs />} />
-            {/* <Route path="/auth" element={<Auth />} /> */}
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route
               path="*"
               element={

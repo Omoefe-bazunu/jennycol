@@ -83,113 +83,146 @@ const ProductDetails = () => {
   };
 
   if (!product)
-    return <p className="text-center text-gray-500">Product not found.</p>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-pink-50">
+        <p className="text-center text-purple-600 font-medium text-xl">
+          Product not found.
+        </p>
+      </div>
+    );
 
   return (
-    <div className="min-h-screen px-6 py-8 flex flex-col items-center">
-      {/* Image Gallery */}
-      <div className="w-full max-w-2xl">
-        <img
-          src={selectedImage}
-          alt={product.name}
-          className="w-full rounded-lg border shadow-lg"
-        />
-        <div className="flex justify-center gap-4 mt-4">
-          {product.images.slice(1, 5).map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Thumbnail ${index}`}
-              className={`w-20 h-20 border rounded cursor-pointer transition-transform transform hover:scale-105 ${
-                selectedImage === img ? "border-blue-500" : ""
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
+      <div className="flex-grow overflow-y-auto px-6 py-8">
+        {/* Image Gallery */}
+        <div className="w-full max-w-2xl mx-auto">
+          <img
+            src={selectedImage}
+            alt={product.name}
+            className="w-full rounded-xl border border-purple-200 shadow-lg transform transition-transform duration-300 hover:scale-105"
+          />
+          <div className="flex justify-center gap-4 mt-6">
+            {product.images.slice(1, 5).map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Thumbnail ${index}`}
+                className={`w-20 h-20 border-2 rounded-lg cursor-pointer transition-all duration-300 transform hover:scale-110 hover:shadow-md ${
+                  selectedImage === img
+                    ? "border-pink-500 shadow-md"
+                    : "border-purple-200"
+                }`}
+                onClick={() => setSelectedImage(img)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Product Info */}
+        <div className="w-full max-w-2xl mx-auto mt-8">
+          <h1 className="text-3xl font-bold text-purple-900">{product.name}</h1>
+          <p className="text-purple-600 mt-2 font-medium">
+            {product.category.toUpperCase()}
+          </p>
+          <p className="mt-4 text-gray-700 leading-relaxed">
+            {product.description}
+          </p>
+          <p className="text-xl text-pink-600 font-bold mt-3">
+            ${product.price}{" "}
+            {product.originalPrice && (
+              <span className="text-purple-400 line-through text-base ml-2">
+                ${product.originalPrice}
+              </span>
+            )}
+          </p>
+
+          <div className="mt-6 flex gap-4">
+            <a
+              href={`https://wa.me/?text=I'm%20interested%20in%20your%20${encodeURIComponent(
+                product.name
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md"
+            >
+              Chat Seller
+            </a>
+
+            <button
+              onClick={handleFavorite}
+              className={`px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md ${
+                favorites.includes(product.id)
+                  ? "bg-gradient-to-r from-red-500 to-pink-500 text-white"
+                  : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
               }`}
-              onClick={() => setSelectedImage(img)}
-            />
-          ))}
+            >
+              {favorites.includes(product.id) ? "Unfavorite" : "Favorite"}
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Product Info */}
-      <div className="w-full max-w-2xl mt-6">
-        <h1 className="text-2xl font-bold">{product.name}</h1>
-        <p className="text-gray-600 mt-2">{product.category.toUpperCase()}</p>
-        <p className="mt-4 text-gray-700">{product.description}</p>
-        <p className="text-lg text-gray-900 font-semibold mt-2">
-          ${product.price}{" "}
-          {product.originalPrice && (
-            <span className="text-gray-500 line-through text-sm ml-2">
-              ${product.originalPrice}
-            </span>
-          )}
-        </p>
-
-        <div className="mt-4 flex gap-4">
-          <a
-            href={`https://wa.me/?text=I'm%20interested%20in%20your%20${product.name}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-          >
-            Chat Seller
-          </a>
-
-          <button
-            onClick={handleFavorite}
-            className={`px-6 py-2 border rounded-lg ${
-              favorites.includes(product.id)
-                ? "bg-red-500 text-white"
-                : "bg-gray-200"
-            }`}
-          >
-            {favorites.includes(product.id) ? "Unfavorite" : "Favorite"}
-          </button>
-        </div>
-      </div>
-
-      {/* Reviews Section */}
-      <div className="w-full max-w-2xl mt-10">
-        <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
-        {product.reviews.length > 0 ? (
-          product.reviews.map((review, index) => (
-            <div key={index} className="border-b pb-3 mb-3">
-              <p className="text-lg font-medium">{review.user}</p>
-              <p className="text-yellow-500">
-                {"★".repeat(review.rating)}
-                {"☆".repeat(5 - review.rating)}
-              </p>
-              <p className="text-gray-700">{review.comment}</p>
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No reviews yet.</p>
-        )}
-      </div>
-
-      {/* Related Products */}
-      <div className="w-full max-w-2xl mt-10">
-        <h2 className="text-xl font-semibold mb-4">Related Products</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {relatedProducts.length > 0 ? (
-            relatedProducts.map((product) => (
-              <Link
-                key={product.id}
-                to={`/products/${product.id}`}
-                className="border rounded-lg p-4 shadow-md"
+        {/* Reviews Section */}
+        <div className="w-full max-w-2xl mx-auto mt-12">
+          <h2 className="text-2xl font-semibold text-purple-800 mb-6 relative">
+            Customer Reviews
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+          </h2>
+          {product.reviews.length > 0 ? (
+            product.reviews.map((review, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl p-5 mb-4 shadow-md border border-purple-100"
               >
-                <div className="bg-gray-200 h-32 rounded-md flex items-center justify-center">
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="h-full w-auto object-cover"
-                  />
-                </div>
-                <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
-                <p className="text-gray-600">${product.price}</p>
-              </Link>
+                <p className="text-lg font-medium text-purple-900">
+                  {review.user}
+                </p>
+                <p className="text-yellow-400 text-xl">
+                  {"★".repeat(review.rating)}
+                  {"☆".repeat(5 - review.rating)}
+                </p>
+                <p className="text-gray-700 mt-2">{review.comment}</p>
+              </div>
             ))
           ) : (
-            <p className="text-gray-500">No related products found.</p>
+            <p className="text-purple-600 font-medium">
+              No reviews yet. Be the first to share your thoughts!
+            </p>
           )}
+        </div>
+
+        {/* Related Products */}
+        <div className="w-full max-w-2xl mx-auto mt-12">
+          <h2 className="text-2xl font-semibold text-purple-800 mb-6 relative">
+            Related Treasures
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {relatedProducts.length > 0 ? (
+              relatedProducts.map((product) => (
+                <Link
+                  key={product.id}
+                  to={`/products/${product.id}`}
+                  className="group bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100"
+                >
+                  <div className="bg-gradient-to-br from-purple-200 to-pink-200 h-32 rounded-lg overflow-hidden transform group-hover:scale-105 transition-transform duration-300">
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-purple-900 mt-3">
+                    {product.name}
+                  </h3>
+                  <p className="text-pink-600 font-bold">${product.price}</p>
+                </Link>
+              ))
+            ) : (
+              <p className="text-purple-600 font-medium">
+                No related treasures found.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
