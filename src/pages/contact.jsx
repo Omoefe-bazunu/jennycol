@@ -26,9 +26,9 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
       <div className="flex-grow overflow-y-auto px-6 py-8">
         <div className="max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6 text-center relative">
+          <h2 className="text-xl font-bold text-purple-900 mb-6 text-center relative">
             Get in Touch
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <form onSubmit={handleSubmit} className="space-y-5">
             <input
@@ -38,7 +38,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
             />
             <input
               type="email"
@@ -47,7 +47,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
             />
             <input
               type="tel"
@@ -56,7 +56,7 @@ const Contact = () => {
               value={formData.whatsapp}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
             />
             <textarea
               name="message"
@@ -64,7 +64,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300 h-32 resize-none"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300 h-32 resize-none"
             ></textarea>
             <button
               type="submit"

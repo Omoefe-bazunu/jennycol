@@ -75,9 +75,9 @@ const Products = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
       {/* Page Title */}
-      <h2 className="text-4xl font-bold text-center py-6 text-purple-800 relative">
+      <h2 className="text-xl font-bold text-center py-6 text-purple-800 relative">
         Our Collections
-        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
       </h2>
 
       {/* Filters */}
@@ -89,14 +89,14 @@ const Products = () => {
             placeholder="Search treasures..."
             value={filters.search}
             onChange={handleFilterChange}
-            className="border-2 border-purple-200 rounded-full px-4 py-2 w-full md:w-64 focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50"
+            className="border-2 border-purple text-sm-200 rounded-full px-4 py-2 w-full md:w-64 focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50"
           />
 
           <select
             name="category"
             value={filters.category}
             onChange={handleFilterChange}
-            className="border-2 border-purple-200 rounded-full px-4 py-2 bg-white/50 focus:outline-none focus:border-pink-400 transition-colors duration-300"
+            className="border-2 text-sm border-purple-200 rounded-full px-4 py-2 bg-white/50 focus:outline-none focus:border-purple-400 transition-colors duration-300"
           >
             <option value="all">All Categories</option>
             <option value="electronics">Electronics</option>
@@ -113,7 +113,7 @@ const Products = () => {
               max="1000"
               value={filters.maxPrice}
               onChange={handleFilterChange}
-              className="w-32 accent-pink-500 cursor-pointer"
+              className="w-32 accent-purple-500 cursor-pointer"
             />
             <span className="text-purple-700 font-medium">
               Max: ${filters.maxPrice}
@@ -125,7 +125,7 @@ const Products = () => {
         <div className="flex gap-2 mt-4 md:mt-0">
           <button
             onClick={() => setView("grid")}
-            className={`px-5 py-2 rounded-full transition-all duration-300 ${
+            className={`px-5 py-2 text-sm rounded-full transition-all duration-300 ${
               view === "grid"
                 ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md"
                 : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
@@ -135,7 +135,7 @@ const Products = () => {
           </button>
           <button
             onClick={() => setView("list")}
-            className={`px-5 py-2 rounded-full transition-all duration-300 ${
+            className={`px-5 py-2 text-sm rounded-full transition-all duration-300 ${
               view === "list"
                 ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md"
                 : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
@@ -147,7 +147,7 @@ const Products = () => {
       </div>
 
       {/* Scrollable Product List */}
-      <div className="flex-grow overflow-y-auto px-6 mt-4">
+      <div className="flex-grow overflow-y-auto px-6 mt-8">
         <div
           className={
             view === "grid"
@@ -160,7 +160,7 @@ const Products = () => {
               <Link
                 key={product.id}
                 to={`/products/${product.id}`}
-                className={`group bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 ${
+                className={`group bg-white text-sm rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 ${
                   view === "list" ? "flex gap-6 items-center" : ""
                 }`}
               >
@@ -170,7 +170,7 @@ const Products = () => {
                   }`}
                 ></div>
                 <div className={view === "list" ? "flex-1" : ""}>
-                  <h3 className="text-xl font-semibold text-purple-900 mb-2">
+                  <h3 className="text-sm font-semibold text-purple-900 mb-2">
                     {product.name}
                   </h3>
                   {product.originalPrice ? (

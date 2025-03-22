@@ -18,16 +18,16 @@ const SignUp = ({ toggleForm }) => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
       <div className="flex-grow overflow-y-auto px-6 py-8">
-        <div className="max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6 text-center relative">
+        <div className="max-w-md mx-auto bg-w text-smhite shadow-xl rounded-xl p-6 border border-purple-100">
+          <h2 className="teurplexl font-bold text-purple-900 mb-6 text-center relative">
             Sign Up
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <form onSubmit={handleSubmit} className="space-y-5">
             <input
               type="text"
               placeholder="Full Name"
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -35,7 +35,7 @@ const SignUp = ({ toggleForm }) => {
             <input
               type="email"
               placeholder="Email"
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -43,7 +43,7 @@ const SignUp = ({ toggleForm }) => {
             <input
               type="password"
               placeholder="Password"
-              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-pink-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -55,11 +55,11 @@ const SignUp = ({ toggleForm }) => {
               Sign Up
             </button>
           </form>
-          <p className="text-center mt-6 text-purple-700 font-medium">
+          <p className="text-center mt-6 text-indigo-600 font-medium">
             Already have an account?{" "}
             <Link
               to="/signin"
-              className="text-pink-500 underline hover:text-pink-600 transition-colors duration-300"
+              className="text-purple-700 underline hover:text-pink-600 transition-colors duration-300"
             >
               Sign In
             </Link>

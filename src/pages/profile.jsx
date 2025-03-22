@@ -47,21 +47,21 @@ const UserProfile = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">
       <div className="flex-grow overflow-y-auto px-6 py-8">
         <div className="w-full max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6 relative">
+          <h2 className="text-xl text-center font-bold text-purple-900 mb-6 relative">
             Your Profile
-            <span className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
-          <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-4 rounded-lg">
-            <p className="text-xl font-semibold text-purple-800">{user.name}</p>
-            <p className="text-purple-600 mt-1">{user.email}</p>
+          <div className="bg-purple-600 p-4 rounded-lg text-center">
+            <p className="text-xl font-semibold text-white">{user.name}</p>
+            <p className="text-white mt-1">{user.email}</p>
           </div>
 
-          <h3 className="text-2xl font-semibold text-purple-800 mt-8 mb-4 relative">
+          <h3 className="text-lg font-semibold text-purple-800 mt-8 mb-4 relative">
             Favorite Products
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h3>
           {favorites.length > 0 ? (
-            <ul className="mt-4 space-y-4">
+            <ul className="mt-6 space-y-4 text-sm">
               {favorites.map((product) => (
                 <li
                   key={product.id}
@@ -92,7 +92,7 @@ const UserProfile = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-purple-600 font-medium mt-2">
+            <p className="text-purple-600 text-sm font-medium mt-2">
               No favorite products yet. Start exploring!
             </p>
           )}

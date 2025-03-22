@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { IoHeart } from "react-icons/io5";
+import { GoHeart } from "react-icons/go";
 
 const mockProducts = [
   {
@@ -85,7 +87,7 @@ const ProductDetails = () => {
   if (!product)
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-pink-50">
-        <p className="text-center text-purple-600 font-medium text-xl">
+        <p className="text-center text-purple-600 font-medium text">
           Product not found.
         </p>
       </div>
@@ -120,14 +122,14 @@ const ProductDetails = () => {
 
         {/* Product Info */}
         <div className="w-full max-w-2xl mx-auto mt-8">
-          <h1 className="text-3xl font-bold text-purple-900">{product.name}</h1>
-          <p className="text-purple-600 mt-2 font-medium">
-            {product.category.toUpperCase()}
+          <h1 className="text-xl font-bold text-purple-900">{product.name}</h1>
+          <p className="text-purple-600 text-xs mt-2 font-medium">
+            Category: {product.category.toUpperCase()}
           </p>
-          <p className="mt-4 text-gray-700 leading-relaxed">
+          <p className="mt-4 text-gray-700 text-sm leading-relaxed">
             {product.description}
           </p>
-          <p className="text-xl text-pink-600 font-bold mt-3">
+          <p className="text-sm text-pink-600 font-bold mt-3">
             ${product.price}{" "}
             {product.originalPrice && (
               <span className="text-purple-400 line-through text-base ml-2">
@@ -150,22 +152,26 @@ const ProductDetails = () => {
 
             <button
               onClick={handleFavorite}
-              className={`px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md ${
+              className={`p-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md ${
                 favorites.includes(product.id)
                   ? "bg-gradient-to-r from-red-500 to-pink-500 text-white"
                   : "bg-white text-purple-700 border-2 border-purple-200 hover:bg-purple-50"
               }`}
             >
-              {favorites.includes(product.id) ? "Unfavorite" : "Favorite"}
+              {favorites.includes(product.id) ? (
+                <IoHeart size={12} />
+              ) : (
+                <GoHeart size={12} />
+              )}
             </button>
           </div>
         </div>
 
         {/* Reviews Section */}
         <div className="w-full max-w-2xl mx-auto mt-12">
-          <h2 className="text-2xl font-semibold text-purple-800 mb-6 relative">
+          <h2 className="text-lg font-semibold text-purple-800 mb-6 relative">
             Customer Reviews
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           {product.reviews.length > 0 ? (
             product.reviews.map((review, index) => (
@@ -180,7 +186,7 @@ const ProductDetails = () => {
                   {"★".repeat(review.rating)}
                   {"☆".repeat(5 - review.rating)}
                 </p>
-                <p className="text-gray-700 mt-2">{review.comment}</p>
+                <p className="text-gray-700 mt-2 text-sm">{review.comment}</p>
               </div>
             ))
           ) : (
@@ -192,9 +198,9 @@ const ProductDetails = () => {
 
         {/* Related Products */}
         <div className="w-full max-w-2xl mx-auto mt-12">
-          <h2 className="text-2xl font-semibold text-purple-800 mb-6 relative">
+          <h2 className="text-lg font-semibold text-purple-800 mb-6 relative">
             Related Treasures
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {relatedProducts.length > 0 ? (
@@ -211,10 +217,12 @@ const ProductDetails = () => {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-purple-900 mt-3">
+                  <h3 className="text-sm font-semibold text-purple-900 mt-3">
                     {product.name}
                   </h3>
-                  <p className="text-pink-600 font-bold">${product.price}</p>
+                  <p className="text-pink-600 font-bold text-sm">
+                    ${product.price}
+                  </p>
                 </Link>
               ))
             ) : (

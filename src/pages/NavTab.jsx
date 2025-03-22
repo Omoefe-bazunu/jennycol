@@ -17,7 +17,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 shadow-xl border-t border-purple-400/30 flex justify-around py-3 z-50">
+    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-purple-600  to-indigo-600 shadow-xl border-t border-purple-400/30 flex justify-around py-3 z-50">
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -28,7 +28,7 @@ const Navigation = () => {
           }`
         }
       >
-        <FaHome size={26} className="mb-1" />
+        <FaHome size={20} className="mb-1" />
         <span className="text-xs font-medium">Home</span>
       </NavLink>
 
@@ -42,7 +42,7 @@ const Navigation = () => {
           }`
         }
       >
-        <FaThLarge size={26} className="mb-1" />
+        <FaThLarge size={20} className="mb-1" />
         <span className="text-xs font-medium">Products</span>
       </NavLink>
 
@@ -56,7 +56,7 @@ const Navigation = () => {
           }`
         }
       >
-        <FaUser size={26} className="mb-1" />
+        <FaUser size={20} className="mb-1" />
         <span className="text-xs font-medium">
           {isAuthenticated ? "Profile" : "Login"}
         </span>
@@ -72,7 +72,7 @@ const Navigation = () => {
           }`
         }
       >
-        <FaInfoCircle size={26} className="mb-1" />
+        <FaInfoCircle size={20} className="mb-1" />
         <span className="text-xs font-medium">About</span>
       </NavLink>
 
@@ -86,7 +86,7 @@ const Navigation = () => {
           }`
         }
       >
-        <FaPhone size={26} className="mb-1" />
+        <FaPhone size={20} className="mb-1" />
         <span className="text-xs font-medium">Contact</span>
       </NavLink>
     </nav>
