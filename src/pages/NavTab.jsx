@@ -23,7 +23,7 @@ const Navigation = () => {
       </NavLink>
 
       <NavLink
-        to="/categories"
+        to="/products"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-blue-600" : "text-gray-500"

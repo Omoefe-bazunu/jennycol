@@ -12,7 +12,7 @@ const Home = () => {
       <section className="relative bg-gray-900 text-white py-20 text-center">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Welcome to Our Store
+            Welcome to JENNY COLLECTIONS
           </h1>
           <p className="text-lg md:text-xl mb-6">
             Discover the best deals on high-quality products.

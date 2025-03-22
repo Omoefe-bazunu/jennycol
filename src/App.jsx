@@ -4,7 +4,8 @@ import Navigation from "./pages/NavTab";
 import Products from "./pages/products";
 import ProductDetails from "./pages/productDetails";
 import UserProfile from "./pages/profile";
-// import Checkout from "./pages/Checkout";
+import Contact from "./pages/contact";
+import AboutUs from "./pages/About";
 // import Orders from "./pages/Orders";
 // import Auth from "./pages/Auth";
 // import Navbar from "./components/Navbar";
@@ -21,8 +22,8 @@ const App = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/profile" element={<UserProfile />} />
-            {/* <Route path="/checkout" element={<Checkout />} /> */}
-            {/* <Route path="/orders" element={<Orders />} /> */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<AboutUs />} />
             {/* <Route path="/auth" element={<Auth />} /> */}
             <Route
               path="*"
