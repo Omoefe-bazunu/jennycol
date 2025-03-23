@@ -20,52 +20,31 @@ import { IoHeart, IoHeartOutline } from "react-icons/io5";
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [user] = useAuthState(auth);
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [userFavorites, setUserFavorites] = useState([]);
   const [view, setView] = useState("grid");
-  const [filters, setFilters] = useState({
-    category: searchParams.get("category") || "all",
-    maxPrice: 500000,
-    search: "",
-  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [lastDoc, setLastDoc] = useState(null); // For pagination
-  const [hasMore, setHasMore] = useState(true); // Track if more products are available
-  const PAGE_SIZE = 10; // Number of products per page
+  const [lastDoc, setLastDoc] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const PAGE_SIZE = 10;
 
-  // Debounce function
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(...args), delay);
-    };
-  };
+  const [filters, setFilters] = useState({
+    category: searchParams.get("category") || "all",
+    search: "",
+  });
 
-  // Fetch initial products or more products
   const fetchProducts = useCallback(
     async (isLoadMore = false) => {
       setLoading(true);
       setError(null);
 
       try {
-        // Check local storage first
-        const cachedProducts = JSON.parse(
-          localStorage.getItem("productsCache")
-        );
-        if (cachedProducts && !isLoadMore && !user) {
-          setProducts(cachedProducts);
-          setHasMore(false); // Assume cache has all for simplicity
-          setLoading(false);
-          return;
-        }
-
-        // Build Firestore query with pagination
         const productsQuery = query(
           collection(db, "products"),
-          orderBy("name"), // Ensure consistent ordering (requires index in Firestore)
+          orderBy("name"),
           limit(PAGE_SIZE),
           ...(isLoadMore && lastDoc ? [startAfter(lastDoc)] : [])
         );
@@ -76,21 +55,30 @@ const Products = () => {
           ...doc.data(),
         }));
 
-        if (productsList.length < PAGE_SIZE) setHasMore(false); // No more products to load
+        if (productsList.length < PAGE_SIZE) setHasMore(false);
         setLastDoc(productsSnapshot.docs[productsSnapshot.docs.length - 1]);
 
-        setProducts((prev) =>
-          isLoadMore ? [...prev, ...productsList] : productsList
-        );
+        const updatedAllProducts = isLoadMore
+          ? [...allProducts, ...productsList]
+          : productsList;
 
-        // Cache initial fetch
+        setAllProducts(updatedAllProducts);
+
+        const filtered = updatedAllProducts.filter((product) => {
+          return (
+            (filters.category === "all" ||
+              product.category === filters.category) &&
+            product.name.toLowerCase().includes(filters.search.toLowerCase())
+          );
+        });
+        setFilteredProducts(filtered);
+
         if (!isLoadMore) {
           localStorage.setItem("productsCache", JSON.stringify(productsList));
           const featured = productsList.filter((p) => p.featured).slice(0, 3);
           setFeaturedProducts(featured);
         }
 
-        // Fetch user favorites if logged in
         if (user && !isLoadMore) {
           const userDocRef = doc(db, "users", user.uid);
           const userDocSnap = await getDoc(userDocRef);
@@ -105,37 +93,31 @@ const Products = () => {
         setLoading(false);
       }
     },
-    [user, lastDoc]
+    [user, lastDoc, allProducts, filters]
   );
 
-  // Initial fetch on mount or user change
   useEffect(() => {
     fetchProducts(false);
   }, [fetchProducts]);
 
-  // Apply filters locally
   useEffect(() => {
-    const filtered = products.filter((product) => {
+    setSearchParams({ category: filters.category });
+    const filtered = allProducts.filter((product) => {
       return (
         (filters.category === "all" || product.category === filters.category) &&
-        product.price <= filters.maxPrice &&
         product.name.toLowerCase().includes(filters.search.toLowerCase())
       );
     });
-    setProducts(filtered);
-  }, [filters]);
+    setFilteredProducts(filtered);
+  }, [filters, allProducts, setSearchParams]);
 
-  // Debounced filter change handler
-  const handleFilterChange = debounce((e) => {
+  const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
       ...prev,
-      [name]: name === "maxPrice" ? Number(value) : value,
+      [name]: value,
     }));
-    if (name === "category") {
-      setSearchParams({ category: value });
-    }
-  }, 300);
+  };
 
   const toggleFavorite = async (productId) => {
     if (!user) {
@@ -158,7 +140,6 @@ const Products = () => {
     }
   };
 
-  // Load more products when user scrolls to bottom
   const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
@@ -196,7 +177,7 @@ const Products = () => {
             type="text"
             name="search"
             placeholder="Search treasures..."
-            defaultValue={filters.search}
+            value={filters.search}
             onChange={handleFilterChange}
             className="border-2 text-sm border-purple-200 rounded-full px-4 py-2 w-full md:w-64 focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
           />
@@ -213,21 +194,6 @@ const Products = () => {
             <option value="beauty">Beauty</option>
             <option value="sports">Sports</option>
           </select>
-          <div className="flex items-center gap-3">
-            <input
-              type="range"
-              name="maxPrice"
-              min="5000"
-              max="500000"
-              step="5000"
-              value={filters.maxPrice}
-              onChange={handleFilterChange}
-              className="w-32 accent-purple-500 cursor-pointer"
-            />
-            <span className="text-purple-700 font-medium">
-              Max: ₦{filters.maxPrice.toLocaleString("en-NG")}
-            </span>
-          </div>
         </div>
         <div className="flex gap-2 mt-4 md:mt-0">
           <button
@@ -261,8 +227,8 @@ const Products = () => {
               : "flex flex-col gap-6 pb-20"
           }
         >
-          {products.length > 0 ? (
-            products.map((product) => (
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
               <div
                 key={product.id}
                 className={`group bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 ${
@@ -327,7 +293,7 @@ const Products = () => {
             <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        {!hasMore && products.length > 0 && (
+        {!hasMore && filteredProducts.length > 0 && (
           <p className="text-center text-purple-600 font-medium py-10">
             No more products to load.
           </p>
