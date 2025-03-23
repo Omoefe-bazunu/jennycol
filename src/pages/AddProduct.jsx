@@ -238,7 +238,7 @@ const AddProduct = ({ onAddProduct }) => {
               <button
                 type="button"
                 onClick={addReview}
-                className="w-full text-lg bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md"
+                className="w-full text bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 rounded-full hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 shadow-md"
               >
                 Add Review
               </button>
@@ -272,7 +272,7 @@ const AddProduct = ({ onAddProduct }) => {
               className={`w-full py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-md ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r text-lg from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                  : "bg-gradient-to-r text from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               }`}
             >
               {loading ? "Adding..." : "Add Product after Review"}

@@ -29,7 +29,7 @@ const AdminPage = () => {
   if (!user) return <p className="text-red-500">Access Denied</p>;
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 mt-20  bg-gray-100 rounded-lg shadow-md text-center">
+    <div className="w-full max-w-2xl mx-auto p-6 mt-20 flex-col lg:flex-row gap-6  bg-gray-100 rounded-lg shadow-md text-center">
       <h2 className="text-2xl font-bold mb-4 text-purple-900">
         Admin Dashboard
       </h2>
