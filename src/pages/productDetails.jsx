@@ -184,7 +184,7 @@ const ProductDetails = () => {
         <div className="w-full max-w-2xl mx-auto mt-12">
           <h2 className="text-xl font-semibold text-purple-800 mb-6 relative">
             Customer Reviews
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           {product.reviews.length > 0 ? (
             product.reviews.map((review, index) => (
@@ -212,8 +212,8 @@ const ProductDetails = () => {
         {/* Related Products */}
         <div className="w-full max-w-2xl mx-auto mt-12">
           <h2 className="text-xl font-semibold text-purple-800 mb-6 relative">
-            Related Treasures
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+            Related Products
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {relatedProducts.length > 0 ? (
@@ -243,7 +243,7 @@ const ProductDetails = () => {
               ))
             ) : (
               <p className="text-purple-600 font-medium">
-                No related treasures found.
+                No related products found.
               </p>
             )}
           </div>

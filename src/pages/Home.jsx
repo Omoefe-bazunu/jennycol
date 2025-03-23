@@ -102,7 +102,7 @@ const Home = () => {
       <section className="container mx-auto px-6">
         <h2 className="text-2xl font-bold text-center mb-10 text-purple-800 relative">
           Featured Products
-          <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+          <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products.map((product) => (
@@ -153,7 +153,7 @@ const Home = () => {
       <section className="container mx-auto px-6">
         <h2 className="text-2xl font-bold text-center mb-10 text-purple-800 relative">
           Explore Categories
-          <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+          <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (

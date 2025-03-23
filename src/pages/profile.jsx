@@ -121,8 +121,8 @@ const UserProfile = () => {
           </div>
 
           <h3 className="text-lg font-semibold text-purple-800 mt-8 mb-4 relative">
-            Favorite Treasures
-            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></span>
+            Saved Products
+            <span className="absolute -bottom-2 left-0 w-16 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h3>
           {favorites.length > 0 ? (
             <ul className="mt-6 space-y-4">
@@ -162,7 +162,7 @@ const UserProfile = () => {
             </ul>
           ) : (
             <p className="text-purple-600 font-medium mt-2 text-sm">
-              No favorite treasures yet. Start exploring!
+              No saved products yet.
             </p>
           )}
 

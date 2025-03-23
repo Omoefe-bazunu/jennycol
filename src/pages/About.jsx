@@ -8,7 +8,7 @@ const AboutUs = () => {
         <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100 text-center">
           <h2 className="text-xl font-bold text-purple-900 mb-6 relative">
             About Us
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <img
             src="bg.jpg" // Main image
