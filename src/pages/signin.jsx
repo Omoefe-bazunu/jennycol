@@ -1,16 +1,42 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign In:", { email, password });
-    // Optionally reset form after submission
-    setEmail("");
-    setPassword("");
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      // Sign in user with email and password
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // Reset form
+      setEmail("");
+      setPassword("");
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        navigate("/products"); // Redirect to products page after sign-in
+      }, 2000); // Show success message for 2 seconds
+    } catch (err) {
+      console.error("Error signing in: ", err);
+      setError(
+        err.message || "Failed to sign in. Please check your credentials."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -25,31 +51,46 @@ const SignIn = ({ toggleForm }) => {
             <input
               type="email"
               placeholder="Email"
-              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full px-4 text-sm py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={loading}
             />
             <input
               type="password"
               placeholder="Password"
-              className="w-full text-sm px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
+              className="w-full px-4 py-3 border-2 border-purple-200 rounded-full focus:outline-none focus:border-purple-400 transition-colors duration-300 bg-white/50 text-purple-900 placeholder-purple-300"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={loading}
             />
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-full hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+              disabled={loading}
+              className={`w-full py-3 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-md ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              }`}
             >
-              Sign In
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
-          <p className="text-center mt-6 text-indigo-600 font-medium">
-            No account?{" "}
+          {success && (
+            <p className="text-center mt-4 text-green-600 font-medium">
+              Signed in successfully! Redirecting...
+            </p>
+          )}
+          {error && (
+            <p className="text-center mt-4 text-red-500 font-medium">{error}</p>
+          )}
+          <p className="text-center mt-6 text-purple-700 font-medium">
+            Don’t have an account?{" "}
             <Link
               to="/signup"
-              className="text-purple-700 underline hover:text-pink-600 transition-colors duration-300"
+              className="text-pink-500 underline hover:text-pink-600 transition-colors duration-300"
             >
               Sign Up
             </Link>

@@ -20,7 +20,7 @@ const Contact = () => {
     setFormData({ name: "", email: "", whatsapp: "", message: "" });
   };
 
-  const clientWhatsAppNumber = "+2349012345678"; // Replace with actual WhatsApp number
+  const clientWhatsAppNumber = "+2349126939069";
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-pink-50 pb-20">

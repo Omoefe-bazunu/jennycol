@@ -8,6 +8,9 @@ import Contact from "./pages/contact";
 import AboutUs from "./pages/About";
 import SignIn from "./pages/signin";
 import SignUp from "./pages/signup";
+import AddProduct from "./pages/AddProduct";
+import ProductManager from "./pages/ManageProducts";
+import AdminPage from "./pages/AdminPanel";
 // import Orders from "./pages/Orders";
 // import Auth from "./pages/Auth";
 // import Navbar from "./components/Navbar";
@@ -28,6 +31,9 @@ const App = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/addProduct" element={<AddProduct />} />
+            <Route path="/manageProduct" element={<ProductManager />} />
+            <Route path="/adminPage" element={<AdminPage />} />
             <Route
               path="*"
               element={

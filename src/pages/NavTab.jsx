@@ -7,17 +7,21 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { auth } from "./firebase"; // Import Firebase auth
+import { onAuthStateChanged } from "firebase/auth";
 
 const Navigation = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    setIsAuthenticated(!!user); // Convert to boolean
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-purple-600  to-indigo-600 shadow-xl border-t border-purple-400/30 flex justify-around py-3 z-50">
+    <nav className="fixed bottom-0 left-0 w-full bg-gradient-to-r from-purple-600 to-indigo-600 shadow-xl border-t border-purple-400/30 flex justify-around py-3 z-50">
       <NavLink
         to="/"
         className={({ isActive }) =>

@@ -1,4 +1,5 @@
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTelegramPlane } from "react-icons/fa"; //
+import { FaXTwitter } from "react-icons/fa6";
 
 const AboutUs = () => {
   return (
@@ -7,13 +8,13 @@ const AboutUs = () => {
         <div className="max-w-2xl mx-auto bg-white shadow-xl rounded-xl p-6 border border-purple-100 text-center">
           <h2 className="text-xl font-bold text-purple-900 mb-6 relative">
             About Us
-            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
+            <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
           </h2>
           <img
-            src="/about-us-image.jpg" // Main image
+            src="bg.jpg" // Main image
             alt="About Us"
             className="w-full h-64 object-cover rounded-xl my-6 border border-purple-200 shadow-md transform transition-transform duration-300 hover:scale-105"
-            onError={(e) => (e.target.src = "https://via.placeholder.com/500")} // Fallback image
+            onError={(e) => (e.target.src = "q2.jpg")} // Fallback image
           />
           <p className="text-gray-700 leading-relaxed">
             Welcome to{" "}
@@ -27,7 +28,7 @@ const AboutUs = () => {
           </p>
 
           <div className="mt-8 border-t border-purple-500 pt-4">
-            <p className="text-purple-700 font-medium ">Connect with Us</p>
+            <p className="text-purple-700 font-medium">Connect with Us</p>
             <div className="flex justify-center space-x-4 mt-4">
               <a
                 href="https://facebook.com"
@@ -52,25 +53,25 @@ const AboutUs = () => {
                 />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com" // X link
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 transform hover:scale-125"
               >
-                <FaTwitter
+                <FaXTwitter
                   size={20}
-                  className="text-blue-400 hover:text-blue-600"
+                  className="text-black hover:text-gray-700"
                 />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://t.me/yourTelegram" // Replace with your Telegram link
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 transform hover:scale-125"
               >
-                <FaLinkedin
+                <FaTelegramPlane
                   size={20}
-                  className="text-blue-700 hover:text-blue-900"
+                  className="text-blue-500 hover:text-blue-700"
                 />
               </a>
             </div>
