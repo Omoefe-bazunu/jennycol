@@ -1,5 +1,5 @@
 import { FaFacebook, FaInstagram, FaTelegramPlane } from "react-icons/fa"; //
-import { FaXTwitter } from "react-icons/fa6";
+// import { FaXTwitter } from "react-icons/fa6";
 
 const AboutUs = () => {
   return (
@@ -31,7 +31,7 @@ const AboutUs = () => {
             <p className="text-purple-700 font-medium">Connect with Us</p>
             <div className="flex justify-center space-x-4 mt-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=100076189577070"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 transform hover:scale-125"
@@ -42,7 +42,7 @@ const AboutUs = () => {
                 />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/jen_nystores/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 transform hover:scale-125"
@@ -52,7 +52,7 @@ const AboutUs = () => {
                   className="text-pink-500 hover:text-pink-700"
                 />
               </a>
-              <a
+              {/* <a
                 href="https://x.com" // X link
                 target="_blank"
                 rel="noopener noreferrer"
@@ -62,7 +62,7 @@ const AboutUs = () => {
                   size={20}
                   className="text-black hover:text-gray-700"
                 />
-              </a>
+              </a> */}
               <a
                 href="https://t.me/yourTelegram" // Replace with your Telegram link
                 target="_blank"

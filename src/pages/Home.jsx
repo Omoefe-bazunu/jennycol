@@ -81,7 +81,7 @@ const Home = () => {
       >
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')] opacity-10"></div>
         <div className="container mx-auto px-6 relative z-10">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 animate-fade-in-down tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fade-in-down tracking-tight">
             <span className="bg-clip-text text-transparent bg-white">
               JENNY COLLECTIONS
             </span>

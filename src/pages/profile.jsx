@@ -114,10 +114,12 @@ const UserProfile = () => {
             <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-18 h-1 bg-gradient-to-r from-purple-500 to-indig0-500 rounded-full"></span>
           </h2>
           <div className="bg-purple-600 p-4 rounded-lg text-center">
-            <p className="text-xl font-semibold text-white">
+            <p className="text font-semibold text-white">
               {userData?.name || "User"}
             </p>
-            <p className="text-white mt-1">{userData?.email || user.email}</p>
+            <p className="text-white text-xs mt-1">
+              {userData?.email || user.email}
+            </p>
           </div>
 
           <h3 className="text-lg font-semibold text-purple-800 mt-8 mb-4 relative">
