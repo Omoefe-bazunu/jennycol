@@ -15,15 +15,14 @@ import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [user] = useAuthState(auth); // Track authenticated user
-  const [userFavorites, setUserFavorites] = useState([]); // Store user's favorite product IDs
+  const [user] = useAuthState(auth);
+  const [userFavorites, setUserFavorites] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchProductsAndFavorites = async () => {
       try {
-        // Fetch all products
         const querySnapshot = await getDocs(collection(db, "products"));
         const productList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -31,7 +30,6 @@ const Home = () => {
         }));
         setProducts(productList);
 
-        // Fetch user's favorites if logged in
         if (user) {
           const userDocRef = doc(db, "users", user.uid);
           const userDocSnap = await getDoc(userDocRef);
@@ -45,7 +43,7 @@ const Home = () => {
     };
 
     fetchProductsAndFavorites();
-  }, [user]); // Re-run when user changes (login/logout)
+  }, [user]);
 
   const toggleFavorite = async (productId) => {
     if (!user) {
@@ -112,16 +110,16 @@ const Home = () => {
               key={product.id}
               className="group bg-white rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 relative"
             >
-              <div
-                className="bg-gradient-to-br from-purple-200 to-pink-200 h-48 mb-5 rounded-lg overflow-hidden transform group-hover:scale-105 transition-transform duration-300"
-                style={{
-                  backgroundImage: `url(${
-                    product.images?.[0] || "https://via.placeholder.com/100"
-                  })`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
+              <div className="h-48 mb-5 rounded-lg overflow-hidden transform group-hover:scale-105 transition-transform duration-300">
+                <img
+                  src={product.images?.[0] || "https://via.placeholder.com/100"}
+                  alt={product.name}
+                  className="h-full w-full object-cover"
+                  onError={(e) =>
+                    (e.target.src = "https://via.placeholder.com/100")
+                  }
+                />
+              </div>
               <h3 className="font-semibold text-purple-900 mb-2">
                 {product.name}
               </h3>
